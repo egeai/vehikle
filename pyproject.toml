@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "vehikle"
+version = "0.1.0"
+description = "search the best price for the cars on the second hand market with the help of artificial intelligence"
+authors = ["Bertan ULUSOY <bertan_ulusoy@yahoo.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
