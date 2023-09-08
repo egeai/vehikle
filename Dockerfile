@@ -1,10 +1,15 @@
+# Use a Python base image
 FROM python:3.10
 
+# Set a working directory
 WORKDIR /app
 
-COPY ./src /app
-
+# Install requirements
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["uvicorn", "main.app", "-host", "0.0.0.0", "--port", "8000"]
+# Copy the rest of your application code
+COPY . .
+
+# Set the default command to run start.sh
+CMD ["./start.sh"]
