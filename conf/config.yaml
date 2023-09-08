@@ -4,7 +4,7 @@ params:
   batch_size: 128
 
 wandb:
-  project: car_price_prediction
+  project: vehikle
   entity: bertan-ulusoy
   raw_data_path: data/data.csv
   dest_path: output

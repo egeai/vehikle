@@ -1,19 +1,17 @@
-pandas
-antlr4-python3-runtime==4.12.0
+pandas==2.1.0
 hydra-core==1.3.2
-joblib==1.2.0
-numpy==1.24.2
+joblib==1.3.2
+numpy==1.25.2
 omegaconf==2.3.0
-packaging==23.0
-pip==23.0.1
-PyYAML==6.0
-scikit-learn==1.2.2
+packaging==23.1
+pip==23.2.1
+PyYAML==6.0.1
+scikit-learn==1.3.0
 scipy==1.10.1
-setuptools==67.6.0
-threadpoolctl==3.1.0
-wheel==0.40.0
-mypy
-matplotlib
+setuptools==68.2.0
+mypy==1.5.1
+matplotlib==3.7.2
 seaborn
+scrapy==2.10.1
 
 # -e . # use it to prepare installation package of the project
