@@ -13,5 +13,9 @@ mypy==1.5.1
 matplotlib==3.7.2
 seaborn
 scrapy==2.10.1
+python-decouple==3.8
+prefect~=2.13.0
+requests~=2.31.0
 
 # -e . # use it to prepare installation package of the project
+
