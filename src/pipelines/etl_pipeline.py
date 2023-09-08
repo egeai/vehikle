@@ -33,6 +33,7 @@ def load(data):
     pass
 
 
+
 # Define Flows
 with Flow("Vehikle Data Ingestion Pipeline") as flow:
     logger.info("Getting source of data.")
