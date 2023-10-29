@@ -1,4 +1,4 @@
-BROKER_URL = 'pyamqp://guest:guest@localhost//'
+BROKER_URL = 'redis://localhost:6379/0'
 RESULT_BACKEND = 'redis://localhost:6379/0'
 
 from datetime import timedelta

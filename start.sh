@@ -5,4 +5,4 @@
 python launcher.py
 
 # Start FastAPI
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn src.api.app:app --host 0.0.0.0 --port 8000 --reload

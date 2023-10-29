@@ -2,8 +2,12 @@ import subprocess
 
 
 def start_services():
-    # Starting Prefect agent (assuming local executor for simplicity)
-    subprocess.Popen(["prefect", "agent", "start"])
+    try:
+        # Starting Prefect agent (assuming local executor for simplicity)
+        subprocess.Popen(["prefect", "agent", "start"])
+        # ... rest of your launcher script
+    except Exception as e:
+        print(f"Error starting Prefect agent: {e}")
 
     # Starting Celery worker
     subprocess.Popen(["celery", "-A", "tasks.celery_tasks", "worker", "--loglevel=info"])

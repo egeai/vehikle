@@ -5,8 +5,11 @@ Libraries & Tools:
 * Scrapy for Scraping tasks
 * python-decouple for Environment variables
 
-For data abstraction:
-* Repository Pattern
+Design Patterns:
+- for data abstraction:
+  - Repository Pattern
+- creating preprocessing or model objects:
+  - Factory Method Pattern
 
 Performance Evaluation:
 * R-squared 

@@ -1,15 +1,15 @@
-import prefect
-from prefect import task, Flow, Parameter
-from datetime import datetime
+from datetime import timedelta
 
-from prefect import task, Flow
-from ..extractors.extractor_factory import ExtractorFactory
+import prefect  # type: ignore
+from prefect import task, flow, get_run_logger
+from prefect.runtime import flow_run  # type: ignore
+
+from ..extractors.extractor_factory import ExtractorFactory  # type: ignore
+
+# logger = get_run_logger()
 
 
-logger = prefect.context.get("logger")
-
-
-@task(max_retries=3, retry_delay=datetime.timedelta(minutes=1))
+@task(retries=3, retry_delay_seconds=10000)
 def extract_data(source_type: str, path_or_url: str):
     extractor = ExtractorFactory.get_extractor(source_type=source_type)
     if source_type == "csv":
@@ -33,25 +33,22 @@ def load(data):
     pass
 
 
-
 # Define Flows
-with Flow("Vehikle Data Ingestion Pipeline") as flow:
-    logger.info("Getting source of data.")
-    source_type = Parameter("source_type")
-    src_path = Parameter('src_path')
+with flow(name="Vehikle Data Ingestion Pipeline") as flw:
+    # logger.info("Getting source of data.")
+    source_type = flow_run.parameters["source_type"]
+    src_path = flow_run.parameters['src_path']
 
     raw_data = extract_data(source_type=source_type, path_or_url=src_path)
     transformed_data = transform(raw_data)
     load(transformed_data)
 
-flow.register(project_name="VehikleProject")
-
-flow.run(source_type="csv", src_path='../data/car_data.csv')
+flw.register(project_name="VehikleProject")
+# flw.run(source_type="csv", src_path='../data/car_data.csv')
 # or
-flow.run(source_type="web", src_path='https://example.com/data_source')
+# flw.run(source_type="web", src_path='https://example.com/data_source')
 
 # Start Prefect server:
 # prefect server start
 # Start Prefect Agent to execute the flow runs (in another terminal)
 # prefect agent local start
-

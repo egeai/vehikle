@@ -17,6 +17,8 @@ seaborn = "^0.12.2"
 matplotlib = "^3.7.1"
 scikit-learn = "^1.2.2"
 jupyter = "^1.0.0"
+celery = "^5.3.4"
+prefect = "^2.13.0"
 
 
 [build-system]

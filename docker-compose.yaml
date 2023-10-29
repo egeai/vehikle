@@ -4,15 +4,53 @@ services:
     build: .
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+      - cache
+    environment:
+      DATABASE_URL: postgresql://postgres:1234@db:5432/vehikle
+      REDIS_URL: redis://cache:6379/0
+
   db:
-    image: "postgres"
+    image: postgres:13
+    container_name: postgres_container
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=vehikle
+    volumes:
+        - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   cache:
-    image: "redis"
+    image: "redis:alpine"
+    container_name: redis_container
     ports:
       - "6379:6379"
-  worker:
-    image: "celery"
+
+  celery_worker:
+    image: vehikle_web:latest
+    container_name: celery_worker_container
+    command: celery -A tasks.celery_tasks worker --loglevel=info
     depends_on:
       - web
+      - cache
+      - db
+
+
+  celery_beat:
+    image: vehikle_web:latest
+    container_name: celery_beat_container
+    command: celery -A tasks.celery_tasks beat --loglevel=info
+    depends_on:
+      - web
+      - cache
+      - db
+
+volumes:
+  postgres_data:
+
+  #worker:
+  #  image: "celery"
+  #  depends_on:
+  #    - web
